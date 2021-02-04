@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bravo
+  labels:
+    app: bravo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bravo
+  template:
+    metadata:
+      labels:
+        app: bravo
+    spec:
+      containers:
+      - name: bravo
+        image: teperwoman/bravo
+        ports:
+        - containerPort: 8787
