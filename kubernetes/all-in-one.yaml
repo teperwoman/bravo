@@ -1,0 +1,39 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: thefirstcontainer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bravo
+  labels:
+    app: bravo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bravo
+  template:
+    metadata:
+      labels:
+        app: bravo
+    spec:
+      containers:
+      - name: bravo
+        image: tftest/bravo
+        ports:
+        - containerPort: 8787
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bravo
+spec:
+  selector:
+    app: bravo
+  ports:
+    - protocol: TCP
+      port: 8787
+      targetPort: 8787
+  type: LoadBalancer
